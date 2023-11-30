@@ -1,0 +1,160 @@
+$black: #161616;
+$orange: #fea800;
+@mixin slider{
+    display: flex;
+    overflow: hidden;
+    flex-direction: row-reverse; 
+    .images{
+        display: flex;
+        flex-direction: row-reverse;
+    }
+}
+@mixin drukFont{
+    font-family: "Druk Text Wide Web Medium Regular", serif;
+    font-weight: 100;
+}
+@mixin arrowButtons{  
+    background-position: center;
+    border: 1px solid $orange;
+    border-radius: 5px;  
+    padding: 10px;
+    margin-bottom: 5px;
+    height: 60px;
+    width: 60px;   
+    cursor: pointer;
+    filter: brightness(0);
+    &:hover{
+        filter: brightness(1);
+        background-color: $orange;
+        transition: 0.15s ease-in-out; 
+        background-position: center;
+    }
+}
+.body{
+    display: flex;
+}
+.home-screen{
+    @include drukFont();
+    position: absolute;   
+    display: flex;   
+    justify-content: center;
+    align-items: center;
+    top: 16%;
+    left: 37%;
+    flex-direction: column;
+    width: 500px;
+    #logo{
+        width: 200px;
+        margin-bottom: 20px;
+    }
+    .welcome-message{
+        font-family: "Druk Text Wide Web Medium Regular";
+        text-align: center;
+        color: $black;
+        .title{             
+            font-size: 30px;
+        }
+        .subtitle{    
+            margin-top: 0px;     
+            font-size: 70px;
+        }
+    }
+    .signature{
+        margin-top: 150px;  
+        font-size: 18px
+    }
+    .begin-button{
+        @include drukFont();
+        border: 3px solid $orange;
+        border-radius: 5px;
+        color: $orange;
+        padding-inline: 30px;
+        padding-block: 15px;
+        font-size: 20px;
+        cursor: pointer;
+        &:hover{
+            background-color: $orange;
+            color: $black;
+            transition: 0.2s ease-in-out;
+        }
+    }
+}
+.grid-container{
+    display: grid;
+    margin-top: 180px;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    max-width: 2300px;
+    height: 500px;
+    width: 1600px;
+}
+.slider-upper{
+    grid-area: 1/1/2/5;
+    @include slider;    
+}
+.slider-lower{
+    grid-area: 2/1/3/4;
+    @include slider;
+}
+.slide{
+    padding: 5px;
+    border-radius: 10px;
+};
+.arrows{
+    grid-area: 2/4/3/5;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    padding: 5px;
+}
+#left{ 
+    background: url("assets/arrow-blue-left.png") no-repeat;
+    @include arrowButtons;  
+    &:disabled{
+        background: url("assets/arrow-gray-left.png") no-repeat;
+        background-color: gray;
+        background-position: center;
+        border: 0px;
+        cursor: default;
+    }
+}
+#right{
+    background: url("assets/arrow-blue-right.png") no-repeat;
+    @include arrowButtons;   
+    &:disabled{
+        background: url("assets/arrow-gray-right.png") no-repeat;
+        background-color: gray;
+        background-position: center;
+        border: 0px;
+        cursor: default;
+    }
+}
+
+.text-container{
+    @include drukFont();
+    grid-area: 1/5/3/6;
+    margin-left: 20px;
+    width: 450px;
+        .text{
+            overflow-wrap:normal;
+            h1{
+                top: 0px;
+                font-size: 40px;
+                font-weight: 400;
+                color: $orange;
+            }
+            p{
+                font-size: 20px;
+                font-weight: 300;
+            }
+    }
+}
+.gradient{
+    height: 100%;
+    width: 100px;
+    background: rgb(255,255,255);
+    background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
+    position: fixed;
+    left:0;
+    z-index: 100;
+}

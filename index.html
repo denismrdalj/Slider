@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <link href="https://db.onlinewebfonts.com/c/3724259186746d86859fbb0fde0fa44a?family=Druk+Text+Wide+Web+Medium+Regular" rel="stylesheet">               
+    <script src="jquery-3.7.1.min.js"></script>
+</head>
+
+<body>
+    <div class="home-screen">
+        <img src="https://adoptoprod.blob.core.windows.net/careers/9367b148-7717-4953-ad8c-c302d1adf4d2.png" id="logo">       
+        <h1 class="welcome-message">
+            <p class="title">
+                FRONTEND ZADATAK
+            </p>
+            <p class="subtitle">
+                SLIDER
+            </p>
+        </h1>
+        <button class="begin-button" onclick="beginClick()">
+            BEGIN
+        </button>
+        <p class="signature">
+            DENIS MRDALJ
+        </p>
+    </div>
+
+    <div id="grid-container" class="grid-container">
+        <div class="gradient"></div>
+        <div class="slider-upper">           
+            <div class="images" id="images-upper">
+                <img class="slide" src="assets/slider-image-1.jpg" id="slide1">
+                <img class="slide" src="assets/slider-image-2.jpg" id="slide2">
+                <img class="slide" src="assets/slider-image-3.jpg" id="slide3">
+                <img class="slide" src="assets/slider-image-4.jpg" id="slide4">
+                <img class="slide" src="assets/slider-image-5.jpg" id="slide5">
+                <img class="slide" src="assets/slider-image-6.jpg" id="slide6">   
+                <img class="slide" src="assets/slider-image-7.jpg" id="slide7">
+                <img class="slide" src="assets/slider-image-8.jpg" id="slide8">
+                <img class="slide" src="assets/slider-image-9.jpg" id="slide9">        
+            </div>
+        </div>
+        <div class="slider-lower">
+            <div class="images" id="images-lower">
+                <img class="slide" src="assets/slider-image-1.jpg" id="slide1">
+                <img class="slide" src="assets/slider-image-2.jpg" id="slide2">
+                <img class="slide" src="assets/slider-image-3.jpg" id="slide3">
+                <img class="slide" src="assets/slider-image-4.jpg" id="slide4">
+                <img class="slide" src="assets/slider-image-5.jpg" id="slide5">
+                <img class="slide" src="assets/slider-image-6.jpg" id="slide6">   
+                <img class="slide" src="assets/slider-image-7.jpg" id="slide7">
+                <img class="slide" src="assets/slider-image-8.jpg" id="slide8">
+                <img class="slide" src="assets/slider-image-9.jpg" id="slide9">        
+            </div>
+        </div>
+        <div class="arrows">
+            <button class="arrow-button" id="left" onclick="leftClick()"></button>
+            <button class="arrow-button" id="right" onclick="rightClick()"></button>
+        </div>
+        <div class="text-container">
+            <div class="text">
+                <h1>Lorem ipsum dolor sit amet</h1>
+                <p>Ut enim ad minim veniam, quis 
+                    nostrud exercitation ullamco 
+                    laboris nisi ut aliquip ex 
+                    ea commodo consequat. </p>
+            </div>
+        </div>        
+    </div>
+
+    <script>
+        var lowerElements = []
+        var upperElements = []
+        var lowerContainer = document.getElementById("images-lower")
+        var upperContainer = document.getElementById("images-upper")
+        var gridContainer = document.getElementById("grid-container")
+        var homeScreen = document.getElementsByClassName("home-screen")
+    
+        $(homeScreen).hide().fadeIn(200)
+        $(gridContainer).hide()
+           
+        function beginClick(){           
+            $(homeScreen).fadeOut(500)
+            $(gridContainer).delay(500).fadeIn(800)
+            for(var i=1; i<5; i++){
+                lowerElements.push(document.getElementById('slide'+i))
+                lowerContainer.prepend(lowerElements[i-1])
+            }
+            for(var i=5; i<10; i++){
+                upperElements.push(document.getElementById('slide'+i))
+                upperContainer.prepend(upperElements[i-5])
+            }
+        }
+        
+        function leftClick() {    
+            let button = document.querySelector("#left")
+            button.disabled=true
+            lowerElements.push(lowerElements.shift())
+            upperElements.push(upperElements.shift())
+
+            $(lowerContainer).fadeOut(150)
+            setTimeout(function(){
+                $(lowerContainer).prepend(lowerElements[3])
+            },200)            
+            $(lowerContainer).fadeIn(150)
+
+            $(upperContainer).fadeOut(150)               
+            setTimeout(function(){
+                $(upperContainer).prepend(upperElements[4])
+            },200)
+            $(upperContainer).fadeIn(150)   
+            setTimeout(function(){button.disabled = false},200)
+        }
+     
+        function rightClick() {   
+            let button = document.querySelector("#right")
+            button.disabled=true
+            $(lowerContainer).fadeOut(150)
+            setTimeout(function(){
+                for(var i=0; i<3; i++){
+                lowerElements.push(lowerElements.shift())
+                $(lowerContainer).prepend(lowerElements[3])
+                }  
+            },150)
+            $(lowerContainer).fadeIn(150)   
+
+            $(upperContainer).fadeOut(150)
+            setTimeout(function(){
+                for(var i=0; i<4; i++){
+                upperElements.push(upperElements.shift())
+                $(upperContainer).prepend(upperElements[4])
+                }
+            },150)  
+            $(upperContainer).fadeIn(150)    
+            setTimeout(function(){button.disabled = false},200)
+        }
+    </script>
+</body>
+</html>
